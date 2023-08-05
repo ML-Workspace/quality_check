@@ -1,0 +1,13 @@
+prefix=/Users/amitkumar/Documents/AI-Solution/quality_check/venv
+exec_prefix=/Users/amitkumar/Documents/AI-Solution/quality_check/venv
+libdir=/Users/amitkumar/Documents/AI-Solution/quality_check/venv/lib
+sharedlibdir=/Users/amitkumar/Documents/AI-Solution/quality_check/venv/lib
+includedir=/Users/amitkumar/Documents/AI-Solution/quality_check/venv/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
