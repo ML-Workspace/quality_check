@@ -9,8 +9,8 @@ stages:
       checksum: '228052240812269045947815860024335364624'
     - path: src/utility.py
       hash: md5
-      md5: ed6421562005da327c61560a3b32b962
-      size: 723
+      md5: 8dcd5728bd959e98ddfdf92fc774f6b4
+      size: 618
     outs:
     - path: artifacts/data/test.csv
       hash: md5
