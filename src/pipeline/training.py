@@ -3,24 +3,29 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
-from src.constant import MetaInformation
 from src.utility import Utils
 import os
 from src.logs import logger
 import joblib
+import yaml
+import argparse
 
 class Training:
 
-    def __init__(self, train_path, test_path):
-        self.train_path= os.path.join(os.getcwd(), "artifacts/data","train.csv")
-        self.test_path= os.path.join(os.getcwd(), "artifacts/data","test.csv")
+    def __init__(self, config_path):
         self.utils= Utils()
+        self.config = self.utils.read_params(config_path)
+        self.train_path= os.path.join(os.getcwd(), self.config['load_data']['train_path'])
+        self.test_path= os.path.join(os.getcwd(), self.config['load_data']['test_path'])
+
 
     def preprocess_data(self, train_path, test_path):
+        
 
         train_data= self.utils.load_data(train_path)
         test_data= self.utils.load_data(test_path)
 
+        print(train_data.columns[0])
 
         y_train = train_data['quality']
         X_train = train_data.drop('quality', axis=1)
@@ -39,8 +44,8 @@ class Training:
     def train_model(self, X_train, y_train):
         model = LinearRegression()
         model.fit(X_train, y_train)
-        self.utils.create_directory(MetaInformation.model_path)
-        joblib.dump(model, os.path.join(MetaInformation.model_path, 'wime_model.pkl'))
+        self.utils.create_directory(self.config['model_dir'])
+        joblib.dump(model, os.path.join(self.config['model_dir'], 'wime_model.pkl'))
         return model
 
     def evaluate_model(self, model, X_test, y_test):
@@ -58,7 +63,10 @@ class Training:
         mse = self.evaluate_model(model, X_test_scaled, y_test)
         print(f"Mean Squared Error: {mse}")
 
-if __name__ == "__main__":
-    training= Training(MetaInformation.train_path, MetaInformation.test_path)
+if __name__=="__main__":
+    args = argparse.ArgumentParser()
+    args.add_argument("--config", default="params.yaml")
+    parsed_args = args.parse_args()
+    training= Training(config_path=parsed_args.config)
     training.main()
     

@@ -9,22 +9,46 @@ stages:
       checksum: '228052240812269045947815860024335364624'
     - path: src/utility.py
       hash: md5
-      md5: 8dcd5728bd959e98ddfdf92fc774f6b4
-      size: 618
+      md5: eef6d360db6a8f683dd23caa8a70f8f9
+      size: 714
     outs:
     - path: artifacts/data/test.csv
       hash: md5
-      md5: e7ed5eeba80afafd4f201aa554ec3f3d
-      size: 1040
+      md5: c73612b8cdf1d271e53803b0b774bc45
+      size: 1064
     - path: artifacts/data/train.csv
       hash: md5
-      md5: 65b35536dbfd5c76ed4b6ee98bb77e9a
-      size: 78330
+      md5: 9758e59061834fbd84b52ca77bfc9efb
+      size: 85568
     - path: artifacts/data/val.csv
       hash: md5
-      md5: 68f8a0c63c2bcce918c72addd12c25ec
-      size: 5235
+      md5: cfa3ef808c9643704ef8ad942d9aa94e
+      size: 5659
     - path: artifacts/data/wine_quality.csv
       hash: md5
-      md5: 9b49ea6fa7640cbdb9c0de237ddc8428
-      size: 84221
+      md5: 7d814a1bda02145efe703f4e1c01847a
+      size: 91999
+  training:
+    cmd: python src/pipeline/training.py --config=params.yaml
+    deps:
+    - path: artifacts/data/test.csv
+      hash: md5
+      md5: c73612b8cdf1d271e53803b0b774bc45
+      size: 1064
+    - path: artifacts/data/train.csv
+      hash: md5
+      md5: 9758e59061834fbd84b52ca77bfc9efb
+      size: 85568
+    - path: src/utility.py
+      hash: md5
+      md5: eef6d360db6a8f683dd23caa8a70f8f9
+      size: 714
+    params:
+      params.yaml:
+        estimators.ElasticNet.params.alpha: 0.9
+        estimators.ElasticNet.params.l1_ratio: 0.4
+    outs:
+    - path: artifacts/model/wime_model.pkl
+      hash: md5
+      md5: b1ce03a32e6eb9d4b3d4918e3af81c2c
+      size: 704

@@ -9,3 +9,16 @@ stages:
     - artifacts/data/train.csv
     - artifacts/data/test.csv
     - artifacts/data/val.csv
+
+
+  training:
+    cmd: python src/pipeline/training.py --config=params.yaml
+    deps:
+      - artifacts/data/train.csv
+      - artifacts/data/test.csv
+      - src/utility.py
+    params:
+      - estimators.ElasticNet.params.alpha
+      - estimators.ElasticNet.params.l1_ratio
+    outs:
+      - artifacts/model/wime_model.pkl

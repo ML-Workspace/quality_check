@@ -21,7 +21,7 @@ class DataIngestion:
     def _init_data_ingetion(self, config_path):
 
         config = self.utils.read_params(config_path)
-        df= self.utils.load_data(config['data_source']['raw_data_url'])
+        df= self.utils.load_raw_data(config['data_source']['raw_data_url'])
         random_state= config['base']['random_state']
         df_train, df_val, df_test = np.split(df.sample(frac=1, random_state= random_state),
                                      [int(.93*len(df)), int(.99*len(df))])

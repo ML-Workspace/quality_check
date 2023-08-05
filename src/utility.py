@@ -20,6 +20,10 @@ class Utils:
             print(f"Directory '{directory_path}' already exists.")
 
 
+    def load_raw_data(self, url):
+        data = pd.read_csv(url, sep=';')
+        return data
+
     def load_data(self, url):
         data = pd.read_csv(url, sep=',')
         return data
