@@ -1,0 +1,11 @@
+stages:
+  load_data:
+    cmd: python src/component/data_ingestion.py --config=params.yaml
+    deps:
+    - src/utility.py
+    - https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv
+    outs:
+    - artifacts/data/wine_quality.csv
+    - artifacts/data/train.csv
+    - artifacts/data/test.csv
+    - artifacts/data/val.csv

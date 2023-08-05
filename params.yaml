@@ -1,0 +1,24 @@
+base:
+  project: winequality-project
+  random_state: 42
+  target_col: TARGET
+
+data_source:
+  raw_data_url : https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv
+  directory_path : artifacts/data/
+
+load_data:
+  raw_dataset_path: artifacts/data/wine_quality.csv
+  train_path: artifacts/data/train.csv
+  test_path: artifacts/data/test.csv
+  val_path: artifacts/data/val.csv
+
+
+estimators:
+  ElasticNet:
+    params:
+      # alpha: 0.88
+      # l1_ratio: 0.89
+      alpha: 0.9
+      l1_ratio: 0.4
+model_dir: artifacts/model

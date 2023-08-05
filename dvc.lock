@@ -1,0 +1,30 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python src/component/data_ingestion.py --config=params.yaml
+    deps:
+    - path: 
+        https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv
+      hash: md5
+      checksum: '228052240812269045947815860024335364624'
+    - path: src/utility.py
+      hash: md5
+      md5: ed6421562005da327c61560a3b32b962
+      size: 723
+    outs:
+    - path: artifacts/data/test.csv
+      hash: md5
+      md5: e7ed5eeba80afafd4f201aa554ec3f3d
+      size: 1040
+    - path: artifacts/data/train.csv
+      hash: md5
+      md5: 65b35536dbfd5c76ed4b6ee98bb77e9a
+      size: 78330
+    - path: artifacts/data/val.csv
+      hash: md5
+      md5: 68f8a0c63c2bcce918c72addd12c25ec
+      size: 5235
+    - path: artifacts/data/wine_quality.csv
+      hash: md5
+      md5: 9b49ea6fa7640cbdb9c0de237ddc8428
+      size: 84221
